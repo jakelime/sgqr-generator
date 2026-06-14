@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sgqrgen"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Python library to parse, modify, and generate SGQR (Singapore Quick Response) codes."
 readme = "README.md"
 requires-python = ">=3.9"
