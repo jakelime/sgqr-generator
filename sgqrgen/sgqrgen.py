@@ -1,4 +1,5 @@
 import segno
+from decimal import Decimal
 
 
 class SgQRGenerator:
@@ -58,8 +59,12 @@ class SgQRGenerator:
         crc_val = SgQRGenerator.crc16(partial_str.encode("utf-8"))
         return f"{partial_str}{crc_val:04X}"
 
-    def change_price(self, amount: float) -> "SgQRGenerator":
+    def change_price(self, amount: Decimal) -> "SgQRGenerator":
         """Changes the price (Tag 54) in the SGQR string and returns the generator."""
+        if not isinstance(amount, Decimal):
+            raise TypeError("amount must be a Decimal instance")
+        if amount.as_tuple().exponent != -2:
+            raise ValueError("amount must have exactly 2 decimal places")
         self._tags["54"] = f"{amount:.2f}"
         self.qr = self.build_sgqr(self._tags)
         return self

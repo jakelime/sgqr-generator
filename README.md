@@ -33,6 +33,7 @@ uv add sgqrgen
 1. Here is a simple example of how to parse an existing SGQR code, modify the price and comment, and output the updated QR code image:
 
    ```python
+   from decimal import Decimal
    from sgqrgen import SgQRGenerator
 
    # Initial SGQR string (e.g. PayNow merchant QR code)
@@ -42,7 +43,7 @@ uv add sgqrgen
    qr_gen = SgQRGenerator(sgqr_str)
 
    # Modify amount to $8.00 and set comment/reference to "membership"
-   qr_gen.change_price(8.00).change_comment("membership")
+   qr_gen.change_price(Decimal("8.00")).change_comment("membership")
 
    # Export updated QR code image
    qr_gen.output_qrcode("output-qrcode.png")
